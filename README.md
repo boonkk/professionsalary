@@ -4,7 +4,7 @@
 Program takes file paths as arguments.
 Run with:
 mvn clean package
-java -jar target/SalariesCalculator.jar filepath1 filepath2
+java -jar target/SalaryCalculator-jar-with-dependencies.jar filepath1 filepath2
 
 Program supports JSON and CSV files in format:
 CSV format:
