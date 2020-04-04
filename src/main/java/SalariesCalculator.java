@@ -1,10 +1,8 @@
-import com.sun.istack.internal.NotNull;
 import consolewriters.ConsoleWriter;
 import model.Employee;
 import model.EmployeesContainer;
 import org.apache.tika.Tika;
 import readers.*;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -80,7 +78,7 @@ public class SalariesCalculator {
         else return 0;
     }
 
-    private Map<String,BigDecimal> calculateSalaries(@NotNull EmployeesContainer container) {
+    private Map<String,BigDecimal> calculateSalaries(EmployeesContainer container) {
         for(Employee emp : container.getEmployees()) {
             if(emp == null)
                 continue;
@@ -98,7 +96,7 @@ public class SalariesCalculator {
         return text.substring(0,1).toUpperCase() + text.substring(1).toLowerCase();
     }
 
-    private BigDecimal getBigDecimal (@NotNull String stringNumber) {
+    private BigDecimal getBigDecimal (String stringNumber) {
         if(stringNumber == null)
             return BigDecimal.ZERO;
         String resultString = stringNumber.trim().replace(",",".");

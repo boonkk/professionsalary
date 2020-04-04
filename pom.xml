@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>olech.marcin</groupId>
-    <artifactId>salarycalculator</artifactId>
+    <artifactId>professionsalary</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -36,8 +36,11 @@
             <artifactId>tika-core</artifactId>
             <version>1.24</version>
         </dependency>
-
-
+        <dependency>
+            <groupId>org.apache.tika</groupId>
+            <artifactId>tika-parsers</artifactId>
+            <version>1.24</version>
+        </dependency>
     </dependencies>
     
     <build>
@@ -47,7 +50,23 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.6.1</version>
             </plugin>
-        </plugins>
+                <plugin>
+                    <!-- Build an executable JAR -->
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.2.0</version>
+                    <configuration>
+                        <archive>
+                            <manifest>
+                                <addClasspath>true</addClasspath>
+                                <classpathPrefix>lib/</classpathPrefix>
+                                <mainClass>Main</mainClass>
+                            </manifest>
+                        </archive>
+                    </configuration>
+                </plugin>
+            </plugins>
+
     </build>
 
 </project>
