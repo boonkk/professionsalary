@@ -1,23 +1,21 @@
 # professionsalary
-parsing csv/json files with data about employees and calculates sum of salaries for every occured profession
+  parsing csv/json files with data about employees and calculates sum of salaries for every occured profession
 
 Program takes file paths as arguments.
 Run with:
 mvn clean package
 java -jar target/SalariesCalculator.jar filepath1 filepath2
 
-If run with no arguments it looks for files in src/main/java/data directory.
 Program supports JSON and CSV files in format:
 CSV format:
-
-...;job;...;salary;...
+`...;job;...;salary;...
 ...; "Teacher";...;"3540,20";...
-...; "Priest";...;"3469,42";...
+...; "Priest";...;"3469,42";...`
 
 
 
 JSON format:
-{
+`{
   "employees": [
     {
 	...
@@ -27,11 +25,11 @@ JSON format:
 	...
     },
     ...
-}
+}`
 
 or
 
-[
+`[
     {
 	...
       "job": "Teacher",
@@ -41,11 +39,11 @@ or
     },
     ...
 ]
-
+`
 
 - works for files with no extension (e.g. "csvFile" instead of "csvFile.csv")
-- job and salary columns/fields order doesn't matter, just need to be present
-- supports ANY number of columns/fields (just finds if 'job' and 'salary' are present)
+- job and salary columns/fields order doesn't matter, just need to be present in file
+- supports ANY number of columns/fields (finds if 'job' and 'salary' are present)
 - supports "ugly" CSV files e.g. "teAcHer" fields equals "Teacher", ignores whitespaces (...,"Teacher      "        ;....)
 - supports salary values with commas or dots (1000,3 = 1000,3)
 - data can be separated with semicolon(task condition) or comma(usual separator) (CSV file)
