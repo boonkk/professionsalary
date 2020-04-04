@@ -8,7 +8,7 @@ public class CsvFileReaderTest {
 
     @Test
     public void semicolonCsvReadTest(){
-        String path = "uglyCSVSemicolon.csv";
+        String path = ".\\src\\main\\resources\\uglyCSVSemicolon.csv";
         EmployeesContainer employeesContainer = new EmployeesContainer();
         employeesContainer.add(new Employee("pRIeST","200,0"));
         employeesContainer.add(new Employee("priest","2000,00"));
@@ -31,7 +31,7 @@ public class CsvFileReaderTest {
 
     @Test
     public void commaCsvReadTest(){
-        String path = "uglyCSVComma.csv";
+        String path = ".\\src\\main\\resources\\uglyCSVComma.csv";
 
         EmployeesContainer employeesContainer = new EmployeesContainer();
         employeesContainer.add(new Employee("pRIeST","200,0"));
@@ -54,7 +54,7 @@ public class CsvFileReaderTest {
 
     @Test
     public void emptyCsvTest() {
-        String path = "emptyCSVFile.csv";
+        String path = ".\\src\\main\\resources\\emptyCSVFile.csv";
         CsvFileReader csvFileReader = new CsvFileReader(path);
         EmployeesContainer container = csvFileReader.read();
         Assert.assertTrue(container.getEmployees().isEmpty());
@@ -63,8 +63,8 @@ public class CsvFileReaderTest {
     @Test
     public void invalidCsvTest() {
         String[] invalidCsvPaths = {
-                "invalidCsv1.csv",
-                "invalidCsv2.csv" };
+                ".\\src\\main\\resources\\invalidCsv1.csv",
+                ".\\src\\main\\resources\\invalidCsv2.csv" };
         for(String path : invalidCsvPaths) {
             CsvFileReader csvFileReader = new CsvFileReader(path);
             Assert.assertTrue(csvFileReader.read().getEmployees().isEmpty());
