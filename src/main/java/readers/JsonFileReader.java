@@ -2,12 +2,9 @@ package readers;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import consolewriters.ConsoleWriter;
 import model.Employee;
 import model.EmployeesContainer;
-
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
