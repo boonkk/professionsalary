@@ -41,7 +41,6 @@ or
 ]
 `
 
-- works for files with no extension (e.g. "csvFile" instead of "csvFile.csv")
 - job and salary columns/fields order doesn't matter, just need to be present in file
 - supports ANY number of columns/fields (finds if 'job' and 'salary' are present)
 - supports "ugly" CSV files e.g. "teAcHer" fields equals "Teacher", ignores whitespaces (...,"Teacher      "        ;....)
