@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class JsonFileReader extends AbstractReader {
-    public JsonFileReader(String path) {
+    public JsonFileReader(String path){
         super(path);
     }
 

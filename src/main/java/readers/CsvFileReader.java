@@ -3,9 +3,7 @@ package readers;
 import model.Employee;
 import model.EmployeesContainer;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 // standard CSV (comma-separated values) are separated with commas and usually hasn't values in double quotation marks
 // although sample data for the task is separated with semicolon and has values in double quotation marks
@@ -18,11 +16,12 @@ public class CsvFileReader extends AbstractReader {
     private int jobColumnIndex;
     private int salaryColumnIndex;
 
-    public CsvFileReader(String path) {
+    public CsvFileReader(String path){
         super(path);
     }
-
     public EmployeesContainer read() {
+        if(!new File(path).exists())
+            return null;
         EmployeesContainer employeesContainer = new EmployeesContainer();
         try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
             String firstLine = reader.readLine();
@@ -42,11 +41,8 @@ public class CsvFileReader extends AbstractReader {
         }
     }
 
-    public Employee parseLine(String line, int length) throws IllegalArgumentException {
+    private Employee parseLine(String line, int length) throws IllegalArgumentException {
         String[] lineValues = line.split(separator);
-//        for(String s : lineValues)
-//            System.out.println(s);
-//        System.out.println(separator + " len: " + length + " -> " + lineValues.length );
         try{
             if(length == lineValues.length)
                 return new Employee( replaceQuotationMarksAndTrim(lineValues[jobColumnIndex]),
@@ -69,7 +65,7 @@ public class CsvFileReader extends AbstractReader {
         return text.replaceAll("\"", "").trim();
     }
 
-    public int getColumnIndex(String firstLine, String columnName) throws IllegalArgumentException {
+    private int getColumnIndex(String firstLine, String columnName) throws IllegalArgumentException {
         int index=0;
         if(firstLine==null)
             throw new IllegalArgumentException();

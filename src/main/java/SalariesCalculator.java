@@ -2,24 +2,25 @@ import consolewriters.ConsoleWriter;
 import model.Employee;
 import model.EmployeesContainer;
 import readers.*;
+
+import java.io.FileNotFoundException;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SalariesCalculator {
+class SalariesCalculator {
     private final String[] filePaths;
     private Map<String, BigDecimal> jobSalaries;
 
-    public SalariesCalculator(String[] filePaths) {
+    SalariesCalculator(String[] filePaths) {
         this.filePaths = filePaths;
         if(filePaths.length==0){
             ConsoleWriter.writeFileNotFound("");
-            return;
         }
     }
 
 
-    public void start() {
+    void start() {
         for (String filePath : filePaths) {
             jobSalaries = new HashMap<>();
             AbstractReader contentReader;
@@ -27,10 +28,16 @@ public class SalariesCalculator {
             try {
                 contentReader = new CsvFileReader(filePath);
                 employeesContainer = contentReader.read();
+                if(employeesContainer == null)
+                    throw new FileNotFoundException();
                 if( employeesContainer.getEmployees().size() == 0 ) {
                     throw new IllegalArgumentException();
                 }
-            } catch (IllegalArgumentException e) {
+            } catch (FileNotFoundException e){
+                ConsoleWriter.writeFileNotFound(filePath);
+                continue;
+            }
+            catch (IllegalArgumentException e) {
                 contentReader = new JsonFileReader(filePath);
                 employeesContainer = contentReader.read();
                 if( employeesContainer.getEmployees().size() == 0 ) {
@@ -73,7 +80,7 @@ public class SalariesCalculator {
     }
 
     //test purposes
-    protected Map<String, BigDecimal> getJobSalaries() {
+    Map<String, BigDecimal> getJobSalaries() {
         return jobSalaries;
     }
 }
