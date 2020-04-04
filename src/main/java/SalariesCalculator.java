@@ -2,7 +2,6 @@ import consolewriters.ConsoleWriter;
 import model.Employee;
 import model.EmployeesContainer;
 import readers.*;
-import java.io.*;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,20 +11,13 @@ public class SalariesCalculator {
     private Map<String, BigDecimal> jobSalaries;
 
     public SalariesCalculator(String[] filePaths) {
-        if(filePaths.length==0)
-            this.filePaths = getFilesFromDirectory();
-        else
-            this.filePaths = filePaths;
+        this.filePaths = filePaths;
+        if(filePaths.length==0){
+            ConsoleWriter.writeFileNotFound("");
+            return;
+        }
     }
 
-    public String[] getFilesFromDirectory() {
-        File[] files = new File(".\\src\\main\\java\\data").listFiles();
-        StringBuilder sb = new StringBuilder();
-        for(File f : files) {
-                sb.append(f.getPath()).append("####@");
-        }
-        return sb.toString().split("####@");
-    }
 
     public void start() {
         for (String filePath : filePaths) {
@@ -46,7 +38,6 @@ public class SalariesCalculator {
                     continue;
                 }
             }
-
             jobSalaries = calculateSalaries(employeesContainer);
             ConsoleWriter.writeMap(filePath,jobSalaries);
         }
